@@ -38,7 +38,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title"> {{$phrase}} </div>
+                <div class="subtitle">SOUNDS LIKE</div>
+                <div class="title"> {{$rhyme}} </div>
             </div>
         </div>
     </body>

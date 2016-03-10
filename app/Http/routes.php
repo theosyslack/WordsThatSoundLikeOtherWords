@@ -1,5 +1,6 @@
 <?php
 
+use App\Phrase;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -12,7 +13,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $phrase = Phrase::with(['rhymes'])->orderByRaw("RAND()")->first();
+    $rhyme = $phrase->rhymes->first();
+    return view('welcome', ['phrase' => $phrase, 'rhyme' => $rhyme]);
 });
 
 /*
