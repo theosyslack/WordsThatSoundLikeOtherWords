@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+  font-family: sans-serif; }
+
+body {
+  font-size: 96px;
+  line-height: 1.5em;
+  background: orange;
+  color: white;
+  font-weight: bold;
+  padding-top: 10vh;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.container {
+  max-width: 960px;
+  text-align: center; }
+
+.content {
+  text-align: center;
+  display: inline-block; }

@@ -1,2 +1,28 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+html, body {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+  font-size: 96px;
+  line-height: 1.5em;
+  background: orange;
+  color: white;
+  font-weight: bold;
+  padding-top: 10vh;
+
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 960px;
+  text-align: center;
+}
+
+.content {
+    text-align: center;
+    display: inline-block;
+}
