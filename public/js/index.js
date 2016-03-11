@@ -10111,6 +10111,7 @@ exports.insert = function (css) {
 var Vue = require('vue');
 var PhraseBanner = require('./vue/PhraseBanner.vue');
 var NewRhymeForm = require('./vue/NewRhymeForm.vue');
+var Modal = require('./vue/Modal.vue');
 
 document.addEventListener("DOMContentLoaded", function (event) {
   var phraseDataNode = document.querySelector('[data-phrase-data]');
@@ -10125,33 +10126,42 @@ document.addEventListener("DOMContentLoaded", function (event) {
     },
     components: {
       'phrase-banner': PhraseBanner,
-      'rhyme-form': NewRhymeForm
+      'rhyme-form': NewRhymeForm,
+      'modal': Modal
     }
   });
 });
 
-},{"./vue/NewRhymeForm.vue":6,"./vue/PhraseBanner.vue":7,"vue":3}],6:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n.new-rhyme{\n  background: black;\n}\n")
-'use strict';
+},{"./vue/Modal.vue":6,"./vue/NewRhymeForm.vue":7,"./vue/PhraseBanner.vue":8,"vue":3}],6:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("/* line 2, stdin */\n.modal-container[_v-b93186c8] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-transition: all .2s ease-in-out;\n  transition: all .2s ease-in-out;\n  background: rgba(0, 0, 0, 0.5); }\n  /* line 15, stdin */\n  .modal-container .modal[_v-b93186c8] {\n    background: white;\n    color: black;\n    width: 70vw;\n    min-height: 70vh;\n    position: relative;\n    padding: 10vh 10vw; }\n  /* line 25, stdin */\n  .modal-container .close[_v-b93186c8] {\n    position: absolute;\n    top: .5em;\n    right: .5em;\n    height: 2em;\n    width: 2em;\n    font-weight: bold;\n    text-align: center;\n    line-height: 2em;\n    background: gray;\n    color: white;\n    cursor: pointer; }\n    /* line 39, stdin */\n    .modal-container .close[_v-b93186c8]:hover {\n      background: #4d4d4d; }\n")
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
-  props: ['phrase'],
+  props: {
+    visible: {
+      type: Boolean,
+      required: true,
+      twoWay: true
+    }
+  },
   methods: {
-    submit: function submit() {}
+    hide: function hide() {
+      this.visible = false;
+    }
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <form v-on:submit.prevent=\"submit\">\n    <input type=\"text\" name=\"name\" value=\"\">\n    <input type=\"submit\" name=\"name\" value=\"Submit\">\n  </form>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"modal-container\" v-if=\"visible\" @click.stop=\"hide\" _v-b93186c8=\"\">\n  <div class=\"modal\" @click.stop=\"\" _v-b93186c8=\"\">\n    <div class=\"close\" @click.stop=\"hide\" _v-b93186c8=\"\">X</div>\n    <slot _v-b93186c8=\"\">\n\n    </slot>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/NewRhymeForm.vue"
+  var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/Modal.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n.new-rhyme{\n  background: black;\n}\n"] = false
+    require("vueify-insert-css").cache["/* line 2, stdin */\n.modal-container[_v-b93186c8] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-transition: all .2s ease-in-out;\n  transition: all .2s ease-in-out;\n  background: rgba(0, 0, 0, 0.5); }\n  /* line 15, stdin */\n  .modal-container .modal[_v-b93186c8] {\n    background: white;\n    color: black;\n    width: 70vw;\n    min-height: 70vh;\n    position: relative;\n    padding: 10vh 10vw; }\n  /* line 25, stdin */\n  .modal-container .close[_v-b93186c8] {\n    position: absolute;\n    top: .5em;\n    right: .5em;\n    height: 2em;\n    width: 2em;\n    font-weight: bold;\n    text-align: center;\n    line-height: 2em;\n    background: gray;\n    color: white;\n    cursor: pointer; }\n    /* line 39, stdin */\n    .modal-container .close[_v-b93186c8]:hover {\n      background: #4d4d4d; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -10161,7 +10171,66 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],7:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n.phrase {\n\n}\n.subtitle {\n  line-height: 1em;\n  font-size: .25em;\n  font-weight: bold;\n\n}\n")
+var __vueify_style__ = require("vueify-insert-css").insert("/* line 2, stdin */\n.phrase-form {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  text-align: center;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap; }\n  /* line 8, stdin */\n  .phrase-form * {\n    -webkit-box-flex: 100%;\n    -webkit-flex: 100%;\n        -ms-flex: 100%;\n            flex: 100%; }\n  /* line 12, stdin */\n  .phrase-form legend {\n    width: auto;\n    text-align: left; }\n  /* line 17, stdin */\n  .phrase-form input {\n    font-size: 2em;\n    margin: .25em 0;\n    text-align: center; }\n  /* line 23, stdin */\n  .phrase-form .button {\n    margin-top: 1em;\n    font-size: 1.5em;\n    background: black;\n    color: white;\n    padding: 1em;\n    cursor: pointer;\n    border: none; }\n  /* line 34, stdin */\n  .phrase-form .timestamp input[type=\"text\"],\n  .phrase-form .timestamp input[type=\"number\"] {\n    width: 100%; }\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+var Modal = require('./Modal.vue');
+exports.default = {
+  data: function data() {
+    return {
+      modalVisible: false,
+      timestamp: false,
+      form: {
+        phrase: '',
+        rhyme: '',
+        timestamp: {
+          host: '',
+          episode: '',
+          timestamp: ''
+        },
+        submitter: {
+          first: '',
+          last: ''
+        }
+      }
+    };
+  },
+  components: {
+    modal: Modal
+  },
+  methods: {
+    submit: function submit() {
+      console.log('asdfasdfas');
+    },
+    withholdLastName: function withholdLastName() {
+      this.form.submitter.last = 'Withheld';
+    }
+  }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <button @click=\"modalVisible = true\"> Hey I want to submit a dumb rhyme. </button>\n  <modal :visible.sync=\"modalVisible\">\n    <form class=\"phrase-form\">\n      <fieldset class=\"rhyme\">\n        <legend>Rhyme Time for 300, Alex</legend>\n        <input type=\"text\" name=\"name\" placeholder=\"Batman\" v-model=\"form.phrase\">\n        <div>Sounds Like</div>\n        <input type=\"text\" name=\"name\" placeholder=\"Shatman\" v-model=\"form.rhyme\">\n        <div>\n      </div></fieldset>\n      <fieldset class=\"name\">\n        <legend>Name, if you please.</legend>\n          <div>\n            <input type=\"text\" placeholder=\"First Name\" v-model=\"form.submitter.first\">\n          </div>\n          <div>\n            <input type=\"text\" placeholder=\"Last Name\" @focus=\"withholdLastName\" @blur=\"withholdLastName\" v-model=\"form.submitter.last\">\n          </div>\n      </fieldset>\n      <fieldset class=\"timestamp\">\n        <legend> Timestamp </legend>\n        <label>\n          <input type=\"checkbox\" v-model=\"timestamp\">  I'd like to tag this with a timestamp because I am a good samaritan\n        </label>\n\n          <div v-if=\"timestamp\" class=\"timestamp\">\n            <div>\n              <label>\n                Which Episode <input type=\"number\" v-model=\"form.timestamp.episode\" placeholder=\"199\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Timestamp? <input type=\"number\" v-model=\"form.timestamp.timestamp\" placeholder=\"00:00:00\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Who said it? <input type=\"text\" v-model=\"form.timestamp.host\" placeholder=\"Elliott, Stuart, or that other guy\">\n              </label>\n            </div>\n          </div>\n      </fieldset>\n\n      <div class=\"button\" @click=\"submit\"> Send this stuff </div>\n    </form>\n  </modal>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/NewRhymeForm.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["/* line 2, stdin */\n.phrase-form {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  text-align: center;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap; }\n  /* line 8, stdin */\n  .phrase-form * {\n    -webkit-box-flex: 100%;\n    -webkit-flex: 100%;\n        -ms-flex: 100%;\n            flex: 100%; }\n  /* line 12, stdin */\n  .phrase-form legend {\n    width: auto;\n    text-align: left; }\n  /* line 17, stdin */\n  .phrase-form input {\n    font-size: 2em;\n    margin: .25em 0;\n    text-align: center; }\n  /* line 23, stdin */\n  .phrase-form .button {\n    margin-top: 1em;\n    font-size: 1.5em;\n    background: black;\n    color: white;\n    padding: 1em;\n    cursor: pointer;\n    border: none; }\n  /* line 34, stdin */\n  .phrase-form .timestamp input[type=\"text\"],\n  .phrase-form .timestamp input[type=\"number\"] {\n    width: 100%; }\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./Modal.vue":6,"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],8:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n.phrase {\n  font-size: 5em;\n  line-height: 1em;\n  padding: .25em;\n}\n.subtitle {\n  padding: 1em;\n  font-size: 1em;\n  font-weight: bold;\n\n}\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10171,14 +10240,14 @@ exports.default = {
   props: ['phrase']
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"phrase-banner\">\n  <div class=\"phrase\">{{phrase.text}}</div>\n  <div class=\"subtitle\">SOUNDS LIKE</div>\n\n  <div class=\"phrase\" v-for=\"rhyme in phrase.rhymes\">{{rhyme.text}}</div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"phrase-banner\">\n  <div class=\"phrase\">{{phrase.text}}</div>\n  <div class=\"subtitle\">SOUNDS LIKE</div>\n  <div class=\"phrase\" v-for=\"rhyme in phrase.rhymes\">{{rhyme.text}}</div>\n\n  <div v-if=\"timestamp\">\n    <audio preload=\"auto\" src=\"http://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg\">\n  </audio></div>\n  \n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/PhraseBanner.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n.phrase {\n\n}\n.subtitle {\n  line-height: 1em;\n  font-size: .25em;\n  font-weight: bold;\n\n}\n"] = false
+    require("vueify-insert-css").cache["\n.phrase {\n  font-size: 5em;\n  line-height: 1em;\n  padding: .25em;\n}\n.subtitle {\n  padding: 1em;\n  font-size: 1em;\n  font-weight: bold;\n\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
