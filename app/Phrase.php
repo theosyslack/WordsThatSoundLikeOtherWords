@@ -11,6 +11,9 @@ class Phrase extends Model
   public function rhymes(){
     return $this->belongsToMany('App\Phrase', 'rhymes', 'phrase_id', 'other_phrase_id');
   }
+  public function rhyme(){
+    return $this->rhymes()->take(1);
+  }
   public function associateRhyme(Phrase $rhymingPhrase){
     $phrase = $this;
     $phrase->save();
