@@ -1,12 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
 html, body {
   height: 100%;
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Raleway', sans-serif; }
 
 body {
+  background: #2F2F2F;
   font-size: 16px;
   line-height: 1.5em;
   font-weight: bold;
   padding-top: 10vh;
+  color: white;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -15,9 +18,68 @@ body {
           justify-content: center; }
 
 .container {
-  max-width: 960px;
+  max-width: 1180px;
   text-align: center; }
 
 .content {
   text-align: center;
   display: inline-block; }
+
+.phrase {
+  font-size: 2.5em;
+  line-height: 1em;
+  padding: .25em; }
+
+.subtitle {
+  font-size: .75em;
+  font-weight: bold; }
+
+.button {
+  font-size: 1em;
+  background: #9A3333;
+  color: #F8981D;
+  border: none;
+  margin-top: 2em;
+  padding: 1em;
+  cursor: pointer;
+  transition: all .2s ease-in-out; }
+  .button:hover {
+    background: #4d1a1a; }
+
+.phrase-form {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+  .phrase-form * {
+    -webkit-flex: 100%;
+        -ms-flex: 100%;
+            flex: 100%; }
+  .phrase-form legend {
+    width: auto;
+    text-align: left; }
+  .phrase-form input {
+    font-size: 2em;
+    margin: .25em 0;
+    text-align: center; }
+  .phrase-form .button {
+    margin-top: 1em;
+    font-size: 1.5em;
+    background: black;
+    color: white;
+    padding: 1em;
+    cursor: pointer;
+    border: none; }
+  .phrase-form .timestamp input[type="text"],
+  .phrase-form .timestamp input[type="number"] {
+    width: 100%; }
+
+.phrase-banner {
+  font-size: 1.5em; }
+  .phrase-banner .phrase {
+    color: #F8981D;
+    text-shadow: 1px 1px 0px #9A3333, -1px -1px 0px #9A3333, 1px -1px 0px #9A3333, -1px 1px 0px #9A3333; }

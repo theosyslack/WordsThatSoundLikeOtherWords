@@ -10171,7 +10171,6 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],7:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("/* line 2, stdin */\n.phrase-form {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  text-align: center;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap; }\n  /* line 8, stdin */\n  .phrase-form * {\n    -webkit-box-flex: 100%;\n    -webkit-flex: 100%;\n        -ms-flex: 100%;\n            flex: 100%; }\n  /* line 12, stdin */\n  .phrase-form legend {\n    width: auto;\n    text-align: left; }\n  /* line 17, stdin */\n  .phrase-form input {\n    font-size: 2em;\n    margin: .25em 0;\n    text-align: center; }\n  /* line 23, stdin */\n  .phrase-form .button {\n    margin-top: 1em;\n    font-size: 1.5em;\n    background: black;\n    color: white;\n    padding: 1em;\n    cursor: pointer;\n    border: none; }\n  /* line 34, stdin */\n  .phrase-form .timestamp input[type=\"text\"],\n  .phrase-form .timestamp input[type=\"number\"] {\n    width: 100%; }\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10213,24 +10212,19 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <button @click=\"modalVisible = true\"> Hey I want to submit a dumb rhyme. </button>\n  <modal :visible.sync=\"modalVisible\">\n    <form class=\"phrase-form\">\n      <fieldset class=\"rhyme\">\n        <legend>Rhyme Time for 300, Alex</legend>\n        <input type=\"text\" name=\"name\" placeholder=\"Batman\" v-model=\"form.phrase\">\n        <div>Sounds Like</div>\n        <input type=\"text\" name=\"name\" placeholder=\"Shatman\" v-model=\"form.rhyme\">\n        <div>\n      </div></fieldset>\n      <fieldset class=\"name\">\n        <legend>Name, if you please.</legend>\n          <div>\n            <input type=\"text\" placeholder=\"First Name\" v-model=\"form.submitter.first\">\n          </div>\n          <div>\n            <input type=\"text\" placeholder=\"Last Name\" @focus=\"withholdLastName\" @blur=\"withholdLastName\" v-model=\"form.submitter.last\">\n          </div>\n      </fieldset>\n      <fieldset class=\"timestamp\">\n        <legend> Timestamp </legend>\n        <label>\n          <input type=\"checkbox\" v-model=\"timestamp\">  I'd like to tag this with a timestamp because I am a good samaritan\n        </label>\n\n          <div v-if=\"timestamp\" class=\"timestamp\">\n            <div>\n              <label>\n                Which Episode <input type=\"number\" v-model=\"form.timestamp.episode\" placeholder=\"199\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Timestamp? <input type=\"number\" v-model=\"form.timestamp.timestamp\" placeholder=\"00:00:00\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Who said it? <input type=\"text\" v-model=\"form.timestamp.host\" placeholder=\"Elliott, Stuart, or that other guy\">\n              </label>\n            </div>\n          </div>\n      </fieldset>\n\n      <div class=\"button\" @click=\"submit\"> Send this stuff </div>\n    </form>\n  </modal>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <button class=\"button\" @click=\"modalVisible = true\"> Hey, I'd like to submit a dumb rhyme. </button>\n  <modal :visible.sync=\"modalVisible\">\n    <form class=\"phrase-form\">\n      <fieldset class=\"rhyme\">\n        <legend>Rhyme Time for 300, Alex</legend>\n        <input type=\"text\" name=\"name\" placeholder=\"Batman\" v-model=\"form.phrase\">\n        <div>Sounds Like</div>\n        <input type=\"text\" name=\"name\" placeholder=\"Shatman\" v-model=\"form.rhyme\">\n        <div>\n      </div></fieldset>\n      <fieldset class=\"name\">\n        <legend>Name, if you please.</legend>\n          <div>\n            <input type=\"text\" placeholder=\"First Name\" v-model=\"form.submitter.first\">\n          </div>\n          <div>\n            <input type=\"text\" placeholder=\"Last Name\" @focus=\"withholdLastName\" @blur=\"withholdLastName\" v-model=\"form.submitter.last\">\n          </div>\n      </fieldset>\n      <fieldset class=\"timestamp\">\n        <legend> Timestamp </legend>\n        <label>\n          <input type=\"checkbox\" v-model=\"timestamp\">  I'd like to tag this with a timestamp because I am a good samaritan\n        </label>\n\n          <div v-if=\"timestamp\" class=\"timestamp\">\n            <div>\n              <label>\n                Which Episode <input type=\"number\" v-model=\"form.timestamp.episode\" placeholder=\"199\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Timestamp? <input type=\"number\" v-model=\"form.timestamp.timestamp\" placeholder=\"00:00:00\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Who said it? <input type=\"text\" v-model=\"form.timestamp.host\" placeholder=\"Elliott, Stuart, or that other guy\">\n              </label>\n            </div>\n          </div>\n      </fieldset>\n\n      <div class=\"button\" @click=\"submit\"> Send this stuff </div>\n    </form>\n  </modal>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/NewRhymeForm.vue"
-  module.hot.dispose(function () {
-    require("vueify-insert-css").cache["/* line 2, stdin */\n.phrase-form {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  width: 100%;\n  text-align: center;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap; }\n  /* line 8, stdin */\n  .phrase-form * {\n    -webkit-box-flex: 100%;\n    -webkit-flex: 100%;\n        -ms-flex: 100%;\n            flex: 100%; }\n  /* line 12, stdin */\n  .phrase-form legend {\n    width: auto;\n    text-align: left; }\n  /* line 17, stdin */\n  .phrase-form input {\n    font-size: 2em;\n    margin: .25em 0;\n    text-align: center; }\n  /* line 23, stdin */\n  .phrase-form .button {\n    margin-top: 1em;\n    font-size: 1.5em;\n    background: black;\n    color: white;\n    padding: 1em;\n    cursor: pointer;\n    border: none; }\n  /* line 34, stdin */\n  .phrase-form .timestamp input[type=\"text\"],\n  .phrase-form .timestamp input[type=\"number\"] {\n    width: 100%; }\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Modal.vue":6,"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],8:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n.phrase {\n  font-size: 5em;\n  line-height: 1em;\n  padding: .25em;\n}\n.subtitle {\n  padding: 1em;\n  font-size: 1em;\n  font-weight: bold;\n\n}\n")
+},{"./Modal.vue":6,"vue":3,"vue-hot-reload-api":2}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10246,14 +10240,10 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/PhraseBanner.vue"
-  module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n.phrase {\n  font-size: 5em;\n  line-height: 1em;\n  padding: .25em;\n}\n.subtitle {\n  padding: 1em;\n  font-size: 1em;\n  font-weight: bold;\n\n}\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}]},{},[5]);
+},{"vue":3,"vue-hot-reload-api":2}]},{},[5]);
