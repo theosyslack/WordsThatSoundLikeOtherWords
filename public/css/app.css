@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+* {
+  box-sizing: border-box; }
+
 html, body {
   height: 100%;
   font-family: 'Raleway', sans-serif; }
@@ -46,6 +49,32 @@ body {
   .button:hover {
     background: #4d1a1a; }
 
+.error {
+  color: red;
+  background: #990000; }
+
+/* always present */
+.scalein-transition {
+  transition: all 0.2s cubic-bezier(0, 0.4, 0.44, 0.85);
+  opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1); }
+
+/* .scalein-enter defines the starting state for entering */
+/* .scalein-leave defines the ending state for leaving */
+.scalein-enter {
+  opacity: 0;
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1); }
+
+.scalein-leave {
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9); }
+
 .phrase-form {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -54,18 +83,26 @@ body {
   text-align: center;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+  color: #9A3333; }
   .phrase-form * {
     -webkit-flex: 100%;
         -ms-flex: 100%;
             flex: 100%; }
   .phrase-form legend {
     width: auto;
+    color: #9A3333;
     text-align: left; }
+  .phrase-form .rhyme,
+  .phrase-form .name,
+  .phrase-form .timestamp {
+    border: 1px #9A3333 solid;
+    margin: 1em 0; }
   .phrase-form input {
     font-size: 2em;
     margin: .25em 0;
-    text-align: center; }
+    text-align: center;
+    border: none; }
   .phrase-form .button {
     margin-top: 1em;
     font-size: 1.5em;
@@ -83,3 +120,41 @@ body {
   .phrase-banner .phrase {
     color: #F8981D;
     text-shadow: 1px 1px 0px #9A3333, -1px -1px 0px #9A3333, 1px -1px 0px #9A3333, -1px 1px 0px #9A3333; }
+
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgba(0, 0, 0, 0.3); }
+  .modal-container .modal {
+    background: #F8981D;
+    color: black;
+    width: 90vw;
+    min-height: 90vh;
+    position: relative;
+    padding: 10vh 10vw; }
+  .modal-container .close {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    height: 2em;
+    width: 3em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2em;
+    background: #9A3333;
+    color: #F8981D;
+    cursor: pointer; }
+    .modal-container .close:hover {
+      background: #4d1a1a; }

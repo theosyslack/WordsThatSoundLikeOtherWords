@@ -1,4 +1,5 @@
 var Vue = require('vue');
+Vue.use(require('vue-resource'));
 var PhraseBanner = require('./vue/PhraseBanner.vue');
 var NewRhymeForm = require('./vue/NewRhymeForm.vue');
 var Modal = require('./vue/Modal.vue');

@@ -12,12 +12,8 @@
         </fieldset>
         <fieldset class="name">
           <legend>Name, if you please.</legend>
-            <div>
               <input type="text" placeholder="First Name" v-model="form.submitter.first">
-            </div>
-            <div>
               <input type="text" placeholder="Last Name" @focus="withholdLastName" @blur="withholdLastName" v-model="form.submitter.last">
-            </div>
         </fieldset>
         <fieldset class="timestamp">
           <legend> Timestamp </legend>
@@ -45,6 +41,9 @@
         </fieldset>
 
         <div class="button" @click="submit"> Send this stuff </div>
+        <div class="errors" v-if="errors" v-for="error in errors" >
+         <div class="error">{{error}}</div>
+      </div> 
       </form>
     </modal>
   </div>
@@ -56,6 +55,7 @@
       return {
         modalVisible: false,
         timestamp: false,
+        errors: '',
         form: {
           phrase: '',
           rhyme: '',
@@ -76,7 +76,15 @@
     },
     methods: {
       submit: function(){
-          console.log('asdfasdfas');
+          console.log(this.form);
+          
+            // GET request
+            this.$http({url: '/', method: 'POST', data: this.form}).then(function (response) {
+               console.log(response);
+            }, function (response) {
+               this.errors = response.data;
+            });
+
       },
       withholdLastName: function(){
         this.form.submitter.last = 'Withheld'
