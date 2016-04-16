@@ -1,16 +1,3 @@
-<style>
-.phrase {
-  font-size: 5em;
-  line-height: 1em;
-  padding: .25em;
-}
-.subtitle {
-  padding: 1em;
-  font-size: 1em;
-  font-weight: bold;
-
-}
-</style>
 <template>
   <div class="phrase-banner">
     <div class="phrase">{{phrase.text}}</div>

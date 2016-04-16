@@ -1,46 +1,6 @@
-<style lang="scss">
-.phrase-form {
-  display: flex;
-  width: 100%;
-  text-align: center;
-  flex-wrap: wrap;
-
-  * {
-    flex: 100%;
-  }
-
-  legend {
-    width: auto;
-    text-align: left;
-  }
-
-  input {
-    font-size: 2em;
-    margin: .25em 0;
-    text-align: center;
-  }
-
-  .button {
-    margin-top: 1em;
-    font-size: 1.5em;
-    background: black;
-    color: white;
-    padding: 1em;
-    cursor: pointer;
-    border: none;
-  }
-
-  .timestamp {
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-    }
-  }
-}
-</style>
 <template>
   <div class="new-rhyme">
-    <button @click="modalVisible = true"> Hey I want to submit a dumb rhyme. </button>
+    <button class="button" @click="modalVisible = true"> Hey, I'd like to submit a dumb rhyme. </button>
     <modal :visible.sync="modalVisible">
       <form class="phrase-form">
         <fieldset class="rhyme">

@@ -1,26 +1,124 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+
+//Settings
+
+$treepoppy: #F8981D;
+$stiletto: #9A3333;
+$coldgray: #2F2F2F;
+
+$width-large: 1440px;
+$width-default: 1180px;
+$width-medium: 960px;
+$width-small: 720px;
+$width-small: 500px;
+
+
+//Base
 
 html, body {
     height: 100%;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 body {
+  background: $coldgray;
   font-size: 16px;
   line-height: 1.5em;
   font-weight: bold;
   padding-top: 10vh;
+  color: white;
 
   display: flex;
   justify-content: center;
 }
 
+//Objects 
+
 .container {
-  max-width: 960px;
+  max-width: $width-default;
   text-align: center;
 }
 
 .content {
     text-align: center;
     display: inline-block;
+}
+
+.phrase {
+  font-size: 2.5em;
+  line-height: 1em;
+  padding: .25em;
+}
+.subtitle {
+  font-size: .75em;
+  font-weight: bold;
+}
+
+.button {
+  font-size: 1em;
+  background: $stiletto;
+  color: $treepoppy;
+  border: none;
+  margin-top: 2em;
+  padding: 1em;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+   
+   
+  &:hover {
+    background: darken($color: $stiletto, $amount: 20%)
+  }
+}
+
+//Components
+
+.phrase-form {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  flex-wrap: wrap;
+
+  * {
+    flex: 100%;
+  }
+
+  legend {
+    width: auto;
+    text-align: left;
+  }
+
+  input {
+    font-size: 2em;
+    margin: .25em 0;
+    text-align: center;
+  }
+
+  .button {
+    margin-top: 1em;
+    font-size: 1.5em;
+    background: black;
+    color: white;
+    padding: 1em;
+    cursor: pointer;
+    border: none;
+  }
+
+  .timestamp {
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+    }
+  }
+}
+
+.phrase-banner {
+  font-size: 1.5em;
+  .phrase {
+    color: $treepoppy;
+    text-shadow: 1px 1px 0px $stiletto,
+                 -1px -1px 0px $stiletto,
+                 1px -1px 0px $stiletto,
+                 -1px 1px 0px $stiletto,;
+  }
 }
