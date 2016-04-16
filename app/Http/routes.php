@@ -2,6 +2,7 @@
 
 use App\Phrase;
 use Http\Requests;
+use Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -19,10 +20,7 @@ Route::get('/', function () {
     return view('welcome', ['phrase' => $phrase, 'rhymes' => $rhymes]);
 });
 
-Route::post('/', function (Request $request) {
-    dd($request);
-    return ['message' => 'Yo, we saved your shitty rhyme.'];
-});
+Route::post('/', 'RhymeController@save');
 
 
 Route::get('/episodes', function(Request $request){
