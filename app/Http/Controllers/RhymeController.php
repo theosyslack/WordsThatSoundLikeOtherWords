@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Phrase;
+use App\Timestamp;
+use App\Submitter;
 
 class RhymeController extends Controller
 {
@@ -15,11 +17,22 @@ class RhymeController extends Controller
             'rhyme' => 'bail|required'
         ]);
 
+        $timestamp = [];
+        $submitter = [];
+
+        if(!empty($request->timestamp)){
+          $timestamp = Timestamp::firstOrCreate($request->timestamp);
+        }
+
+        if(!empty($request->submitter)){
+          $submitter = Submitter::firstOrCreate($request->submitter);
+        }
+
         $phrase = Phrase::firstOrCreate(['text' => $request->phrase]);
         $rhyme = Phrase::firstOrCreate(['text' => $request->rhyme]);
 
-        return $phrase->associateRhyme($rhyme);
+        $phraseWithRhymes = $phrase->associateRhyme($rhyme, $timestamp, $submitter);
 
-        return [$phrase, $rhyme];
+        return $phraseWithRhymes;
     }
 }
