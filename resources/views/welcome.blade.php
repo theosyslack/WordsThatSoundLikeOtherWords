@@ -10,11 +10,11 @@
     </head>
     <body>
         <div class="container">
-            <phrase-banner :phrase="phrase"></phrase-banner>
-            <rhyme-form></rhyme-form>
+          <rhyme-banner :rhyme="rhyme" ></rhyme-banner>
+          <rhyme-form></rhyme-form>
         </div>
-        <script type="application/json" data-phrase-data>
-            {!! json_encode($phrase) !!}
+        <script type="application/json" data-rhyme-data>
+            {!! json_encode($data) !!}
         </script>
     </body>
 </html>

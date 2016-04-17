@@ -40,6 +40,9 @@ body {
   font-size: .75em;
   font-weight: bold; }
 
+.audio {
+  margin-top: 1em; }
+
 .button {
   font-size: 1em;
   background: #9A3333;
@@ -49,6 +52,10 @@ body {
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out; }
+  .button.-small {
+    font-size: 0.55em;
+    margin: 0;
+    display: inline-block; }
   .button:hover {
     background: #4d1a1a; }
 
@@ -106,6 +113,8 @@ body {
   .phrase-banner .phrase {
     color: #F8981D;
     text-shadow: 1px 1px 0px #9A3333, -1px -1px 0px #9A3333, 1px -1px 0px #9A3333, -1px 1px 0px #9A3333; }
+  .phrase-banner .credit {
+    font-size: .5em; }
 
 .modal-container {
   position: absolute;
@@ -129,6 +138,7 @@ body {
     width: 90vw;
     min-height: 90vh;
     position: relative;
+    overflow: scroll;
     padding: 5vw 5vh; }
   .modal-container .close {
     position: absolute;

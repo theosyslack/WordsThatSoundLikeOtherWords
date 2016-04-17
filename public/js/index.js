@@ -23303,30 +23303,29 @@ module.exports = Vue;
 
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
-var PhraseBanner = require('./vue/PhraseBanner.vue');
+Vue.config.debug = true;
+var RhymeBanner = require('./vue/rhymeBanner.vue');
 var NewRhymeForm = require('./vue/NewRhymeForm.vue');
 var Modal = require('./vue/Modal.vue');
 
 document.addEventListener("DOMContentLoaded", function (event) {
-  var phraseDataNode = document.querySelector('[data-phrase-data]');
-  var phraseData = JSON.parse(phraseDataNode.text);
+  var rhymeDataNode = document.querySelector('[data-rhyme-data]');
+  var rhymeData = JSON.parse(rhymeDataNode.text);
 
   var $vm = new Vue({
     el: 'body',
     data: function data() {
-      return {
-        phrase: phraseData
-      };
+      return rhymeData;
     },
     components: {
-      'phrase-banner': PhraseBanner,
+      'rhyme-banner': RhymeBanner,
       'rhyme-form': NewRhymeForm,
       'modal': Modal
     }
   });
 });
 
-},{"./vue/Modal.vue":185,"./vue/NewRhymeForm.vue":186,"./vue/PhraseBanner.vue":187,"vue":163,"vue-resource":152}],185:[function(require,module,exports){
+},{"./vue/Modal.vue":185,"./vue/NewRhymeForm.vue":186,"./vue/rhymeBanner.vue":187,"vue":163,"vue-resource":152}],185:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23375,6 +23374,7 @@ exports.default = {
       modalVisible: false,
       timestamp: false,
       errors: '',
+      episodes: [],
       buttonMessage: 'Raa-roooowww!',
       form: {
         phrase: '',
@@ -23396,11 +23396,25 @@ exports.default = {
   },
   methods: {
     submit: function submit() {
-      console.log(this.form);
+      var form = this.form;
+      var timestamp = form.timestamp;
+      var submitter = form.submitter;
 
-      // GET request
-      this.$http({ url: '/', method: 'POST', data: this.form }).then(function (response) {
-        console.log(response);
+      var data = {
+        'phrase': form.phrase,
+        'rhyme': form.rhyme
+      };
+
+      if (timestamp.host && timestamp.timestamp && timestamp.episode) {
+        data.timestamp = timestamp;
+      }
+
+      if (submitter.first && submitter.last) {
+        data.submitter = submitter;
+      }
+
+      this.$http({ url: '/', method: 'POST', data: data }).then(function (response) {
+        this.errors = {};
       }, function (response) {
         this.errors = response.data;
       });
@@ -23414,13 +23428,20 @@ exports.default = {
       var _this = this;
 
       var data = XML.parseString(response.data, function (err, data) {
-        _this.episodes = data.rss.channel[0].item;
+        data.rss.channel[0].item.forEach(function (episode, index, array) {
+          if (episode.enclosure) {
+            _this.episodes.push({
+              url: episode.enclosure[0].$.url,
+              title: episode.title[0]
+            });
+          }
+        });
       });
     });
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <button class=\"button\" @click=\"modalVisible = true\"> Hey, I'd like to submit a dumb rhyme. </button>\n  <modal :visible.sync=\"modalVisible\">\n    <form class=\"phrase-form\">\n      <fieldset class=\"rhyme\">\n        <legend>Rhyme Time for 300, Alex</legend>\n        <input type=\"text\" name=\"name\" placeholder=\"Batman\" v-model=\"form.phrase\">\n        <span class=\"soundslike\">Sounds Like</span>\n        <input type=\"text\" name=\"name\" placeholder=\"Shatman\" v-model=\"form.rhyme\">\n        <div>\n      </div></fieldset>\n      <fieldset class=\"name\">\n        <legend>Name, if you please.</legend>\n            <input type=\"text\" placeholder=\"First Name\" v-model=\"form.submitter.first\">\n            <input type=\"text\" placeholder=\"Last Name\" @focus=\"withholdLastName\" @blur=\"withholdLastName\" v-model=\"form.submitter.last\">\n      </fieldset>\n      <fieldset class=\"timestamp\">\n        <legend> Timestamp </legend>\n        <label>\n          <input type=\"checkbox\" v-model=\"timestamp\">  I'd like to tag this with a timestamp because I am a good samaritan\n        </label>\n\n          <div v-if=\"timestamp\">\n            <div>\n              <label>\n                Which Episode?\n                <div>\n                  <select>\n                    <option v-for=\"episode in episodes\" :value=\"episode\">{{episode.title}} </option>\n                  </select>\n                </div>\n              </label>\n            </div>\n            <div>\n              <label>\n                Timestamp? <input type=\"number\" v-model=\"form.timestamp.timestamp\" placeholder=\"00:00:00\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Who said it? <input type=\"text\" v-model=\"form.timestamp.host\" placeholder=\"Elliott, Stuart, or that other guy\">\n              </label>\n            </div>\n          </div>\n      </fieldset>\n      <div class=\"errors\" v-if=\"errors\" v-for=\"error in errors\">\n         <div class=\"error\">{{error}}</div>\n      </div>\n      <div class=\"button\" @click=\"submit\"> {{buttonMessage}} </div>\n    </form>\n  </modal>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"new-rhyme\">\n  <button class=\"button\" @click=\"modalVisible = true\"> Hey, I'd like to submit a dumb rhyme. </button>\n  <modal :visible.sync=\"modalVisible\">\n    <form class=\"phrase-form\">\n      <fieldset class=\"rhyme\">\n        <legend>Rhyme Time for 300, Alex</legend>\n        <input type=\"text\" name=\"name\" placeholder=\"Batman\" v-model=\"form.phrase\">\n        <span class=\"soundslike\">Sounds Like</span>\n        <input type=\"text\" name=\"name\" placeholder=\"Shatman\" v-model=\"form.rhyme\">\n        <div>\n      </div></fieldset>\n      <fieldset class=\"name\">\n        <legend>Name, if you please.</legend>\n            <input type=\"text\" placeholder=\"First Name\" v-model=\"form.submitter.first\">\n            <input type=\"text\" placeholder=\"Last Name\" @focus=\"withholdLastName\" @blur=\"withholdLastName\" v-model=\"form.submitter.last\">\n      </fieldset>\n      <fieldset class=\"timestamp\">\n        <legend> Timestamp </legend>\n        <label>\n          <input type=\"checkbox\" v-model=\"timestamp\">  I'd like to tag this with a timestamp because I am a good samaritan\n        </label>\n\n          <div v-if=\"timestamp\">\n            <div>\n              <label>\n                Which Episode?\n                <div>\n                  <select v-model=\"form.timestamp.episode\">\n                    <option v-for=\"episode in episodes\" :value=\"episode.url\">{{episode.title}} </option>\n                  </select>\n                </div>\n              </label>\n            </div>\n            <div>\n              <label>\n                Timestamp? <input type=\"number\" v-model=\"form.timestamp.timestamp\" placeholder=\"00:00:00\">\n              </label>\n            </div>\n            <div>\n              <label>\n                Who said it? <input type=\"text\" v-model=\"form.timestamp.host\" placeholder=\"Elliott, Stuart, or that other guy\">\n              </label>\n            </div>\n          </div>\n      </fieldset>\n      <div class=\"errors\" v-if=\"errors\" v-for=\"error in errors\">\n         <div class=\"error\">{{error}}</div>\n      </div>\n      <div class=\"button\" @click=\"submit\"> {{buttonMessage}} </div>\n    </form>\n  </modal>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -23439,15 +23460,46 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
-  props: ['phrase']
+  props: ['rhyme'],
+  data: function data() {
+    return {
+      audioHasBeenPlayed: false
+    };
+  },
+  computed: {
+    phrases: function phrases() {
+      return {
+        first: this.rhyme.phrases[0].text,
+        second: this.rhyme.phrases[1].text
+      };
+    },
+    submitter: function submitter() {
+      return this.rhyme.submitter.first;
+    },
+    timestamp: function timestamp() {
+      return this.rhyme.timestamp;
+    }
+  },
+  methods: {
+    setTimestamp: function setTimestamp() {
+      if (this.audioHasBeenPlayed === false) {
+        this.$els.audio.currentTime = this.timestamp.timestamp;
+      }
+      this.audioHasBeenPlayed = true;
+    },
+    resetTimestamp: function resetTimestamp() {
+      this.$els.audio.currentTime = this.timestamp.timestamp;
+      this.audioHasBeenPlayed = false;
+    }
+  }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"phrase-banner\">\n  <div class=\"phrase\">{{phrase.text}}</div>\n  <div class=\"subtitle\">SOUNDS LIKE</div>\n  <div class=\"phrase\" v-for=\"rhyme in phrase.rhymes\">{{rhyme.text}}</div>\n\n  <div v-if=\"timestamp\">\n    <audio preload=\"auto\" src=\"http://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg\">\n  </audio></div>\n  \n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"phrase-banner\">\n  <div class=\"phrase\">{{phrases.first}}</div>\n  <div class=\"subtitle\">SOUNDS LIKE</div>\n  <div class=\"phrase\">{{phrases.second}}</div>\n  <div class=\"credit\" v-if=\"submitter\">\n      Submited by {{submitter}} Last Name Witheld\n  </div>\n  <div v-if=\"timestamp\">\n    <audio class=\"audio\" :src=\"timestamp.episode\" controls=\"\" v-el:audio=\"\" @play.capture=\"setTimestamp\">\n      Your browser does not support the <code>audio</code> element.\n    </audio>\n    <div>\n      <button class=\"button -small\" @click=\"resetTimestamp\" v-if=\"audioHasBeenPlayed\">Reset Timestamp</button>\n    </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/PhraseBanner.vue"
+  var id = "/Users/theo/Sites/WordsThatSound/resources/assets/js/vue/rhymeBanner.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {

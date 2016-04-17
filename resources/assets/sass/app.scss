@@ -59,7 +59,9 @@ body {
   font-size: .75em;
   font-weight: bold;
 }
-
+.audio {
+  margin-top: 1em;
+}
 .button {
   font-size: 1em;
   background: $stiletto;
@@ -70,6 +72,11 @@ body {
   cursor: pointer;
   transition: all .2s ease-in-out;
 
+  &.-small {
+    font-size: 0.55em;
+    margin: 0;
+    display: inline-block;
+  }
 
   &:hover {
     background: darken($color: $stiletto, $amount: 20%)
@@ -142,6 +149,10 @@ body {
                  1px -1px 0px $stiletto,
                  -1px 1px 0px $stiletto;
   }
+
+  .credit {
+    font-size: .5em;
+  }
 }
 .modal-container {
 
@@ -161,6 +172,7 @@ body {
     width: 90vw;
     min-height: 90vh;
     position: relative;
+    overflow: scroll;
     padding: 5vw 5vh;
   }
 

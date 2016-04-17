@@ -26,8 +26,8 @@
                 <label>
                   Which Episode?
                   <div>
-                    <select>
-                      <option v-for="episode in episodes" :value="episode" >{{episode.title}} </option>
+                    <select v-model="form.timestamp.episode">
+                      <option v-for="episode in episodes" :value="episode.url" >{{episode.title}} </option>
                     </select>
                   </div>
                 </label>
@@ -61,6 +61,7 @@
         modalVisible: false,
         timestamp: false,
         errors: '',
+        episodes: [],
         buttonMessage: 'Raa-roooowww!',
         form: {
           phrase: '',
@@ -82,14 +83,30 @@
     },
     methods: {
       submit: function(){
-          console.log(this.form);
+        var form = this.form;
+        var timestamp = form.timestamp;
+        var submitter = form.submitter;
 
-            // GET request
-            this.$http({url: '/', method: 'POST', data: this.form}).then(function (response) {
-               console.log(response);
-            }, function (response) {
-               this.errors = response.data;
-            });
+        var data = {
+          'phrase': form.phrase,
+          'rhyme': form.rhyme
+        }
+
+        if( timestamp.host && timestamp.timestamp && timestamp.episode ){
+          data.timestamp = timestamp;
+        }
+
+
+        if( submitter.first && submitter.last ){
+          data.submitter = submitter;
+        }
+
+
+        this.$http({url: '/', method: 'POST', data: data}).then(function (response) {
+           this.errors = {};
+        }, function (response) {
+           this.errors = response.data;
+        });
 
       },
       withholdLastName: function(){
@@ -99,7 +116,14 @@
     ready: function(){
       this.$http({url:'http://theflophouse.libsyn.com/rss', method:'GET'}).then(function (response) {
         var data = XML.parseString(response.data, (err, data)=>{
-          this.episodes = data.rss.channel[0].item;
+          data.rss.channel[0].item.forEach((episode, index, array)=>{
+            if(episode.enclosure){
+              this.episodes.push({
+                url: episode.enclosure[0].$.url,
+                title: episode.title[0]
+              });
+            }
+          });
         });
       });
     }
