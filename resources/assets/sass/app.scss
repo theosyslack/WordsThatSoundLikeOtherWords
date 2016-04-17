@@ -16,6 +16,7 @@ $width-small: 500px;
 
 //Base
 * { box-sizing: border-box; }
+
 html, body {
     height: 100%;
     font-family: 'Raleway', sans-serif;
@@ -31,9 +32,13 @@ body {
 
   display: flex;
   justify-content: center;
+
+  @media (max-width: $width-medium){
+    font-size: 14px;
+  }
 }
 
-//Objects 
+//Objects
 
 .container {
   max-width: $width-default;
@@ -64,8 +69,8 @@ body {
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out;
-   
-   
+
+
   &:hover {
     background: darken($color: $stiletto, $amount: 20%)
   }
@@ -97,59 +102,37 @@ body {
 //Components
 
 .phrase-form {
-  display: flex;
   width: 100%;
-  text-align: center;
-  flex-wrap: wrap;
   color: $stiletto;
 
-  * {
-    flex: 100%;
-  }
 
-  legend {
-    width: auto;
-    color: $stiletto;
-    text-align: left;
-  }
-  
   .rhyme,
   .name,
   .timestamp {
-    border: 1px $stiletto solid;
-    margin: 1em 0;
-  }
-  
-  
-  
-
-  input {
-    font-size: 2em;
-    margin: .25em 0;
-    text-align: center;
-    border: none;
-  }
-
-  .button {
-    margin-top: 1em;
-    font-size: 1.5em;
-    background: black;
-    color: white;
+    text-align: left;
+    border: 3px $stiletto solid;
     padding: 1em;
-    cursor: pointer;
-    border: none;
   }
 
-  .timestamp {
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-    }
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.5em;
+    margin: .25em 0;
+  }
+
+  .rhyme .soundslike,
+  .rhyme input {
+    display: block;
+    text-align: center;
   }
 }
 
 .phrase-banner {
   font-size: 1.5em;
+
   .phrase {
     color: $treepoppy;
     text-shadow: 1px 1px 0px $stiletto,
@@ -176,7 +159,7 @@ body {
     width: 90vw;
     min-height: 90vh;
     position: relative;
-    padding: 10vh 10vw;
+    padding: 5vw 5vh;
   }
 
   .close {
