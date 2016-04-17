@@ -93,7 +93,9 @@ body {
     width: 100%;
     max-width: 100%;
     font-size: 1.5em;
-    margin: .25em 0; }
+    margin: .25em 0;
+    border: none;
+    padding: .25em; }
   .phrase-form .rhyme .soundslike,
   .phrase-form .rhyme input {
     display: block;
