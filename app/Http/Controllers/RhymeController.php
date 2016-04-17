@@ -13,7 +13,9 @@ class RhymeController extends Controller
             'phrase' => 'bail|required',
             'rhyme' => 'bail|required'
         ]);
-         
-        return $validation; 
+
+
+
+        return $validation;
     }
 }

@@ -44,11 +44,10 @@
               </div>
             </div>
         </fieldset>
-
-        <div class="button" @click="submit"> {{buttonMessage}} </div>
         <div class="errors" v-if="errors" v-for="error in errors" >
-         <div class="error">{{error}}</div>
-      </div>
+           <div class="error">{{error}}</div>
+        </div>
+        <div class="button" @click="submit"> {{buttonMessage}} </div>
       </form>
     </modal>
   </div>
