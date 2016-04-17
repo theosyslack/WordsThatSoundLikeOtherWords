@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Rhyme;
 
 class Phrase extends Model
 {
@@ -18,10 +19,18 @@ class Phrase extends Model
     $phrase = $this;
     $phrase->save();
     $rhymingPhrase->save();
+
+    $rhyme = Rhyme::where(['phrase_id' => $phrase->id, 'other_phrase_id' => $rhymingPhrase->id,]);
+    $inverseRhyme = Rhyme::where(['phrase_id' => $phrase->id, 'other_phrase_id' => $rhymingPhrase->id,]);
+
+    if ($rhyme->count() || $inverseRhyme->count()){
+      return [$phrase, $rhymingPhrase];
+    }
+
     $phrase->rhymes()->save($rhymingPhrase);
     $rhymingPhrase->rhymes()->save($phrase);
 
-    return $phrase;
+      return [$phrase, $rhymingPhrase];
   }
   public function __toString(){
     return $this->text;
