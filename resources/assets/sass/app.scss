@@ -78,6 +78,15 @@ body {
     display: inline-block;
   }
 
+  &.-green {
+    background: #41B883;
+    color: darken(#41B883, 20%);
+    &:hover {
+      color: #41B883;
+      background: darken(#41B883, 20%);
+    }
+  }
+
   &:hover {
     background: darken($color: $stiletto, $amount: 20%)
   }

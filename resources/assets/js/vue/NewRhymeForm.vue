@@ -44,10 +44,10 @@
               </div>
             </div>
         </fieldset>
+        <div :class="buttonClass" @click="submit"> {{buttonMessage}} </div>
         <div class="errors" v-if="errors" v-for="error in errors" >
            <div class="error">{{error}}</div>
         </div>
-        <div class="button" @click="submit"> {{buttonMessage}} </div>
       </form>
     </modal>
   </div>
@@ -61,6 +61,7 @@
         modalVisible: false,
         timestamp: false,
         errors: '',
+        successOnForm: false,
         episodes: [],
         buttonMessage: 'Raa-roooowww!',
         form: {
@@ -78,11 +79,42 @@
         }
       }
     },
+    computed: {
+      buttonClass: function(){
+          return {
+            'button': true,
+            '-green': this.successOnForm
+          }
+      }
+    },
     components: {
       modal: Modal
     },
     methods: {
       submit: function(){
+        this.updateButtonMessage('Processing...');
+        var data = this.prepareFormData();
+
+        this.$http({url: '/', method: 'POST', data: data}).then(function (response) {
+           this.errors = {};
+           this.successOnForm = true;
+           this.updateButtonMessage('You did it! Daddy so proud.', '-green');
+
+           setTimeout(()=>{
+             this.modalVisible = false;
+             this.successOnForm = false;
+           }, 1500);
+
+        }, function (response) {
+           this.errors = response.data;
+           this.updateButtonMessage('Try Again?');
+        });
+
+      },
+      withholdLastName: function(){
+        this.form.submitter.last = 'Withheld'
+      },
+      prepareFormData: function(){
         var form = this.form;
         var timestamp = form.timestamp;
         var submitter = form.submitter;
@@ -102,15 +134,10 @@
         }
 
 
-        this.$http({url: '/', method: 'POST', data: data}).then(function (response) {
-           this.errors = {};
-        }, function (response) {
-           this.errors = response.data;
-        });
-
+        return data;
       },
-      withholdLastName: function(){
-        this.form.submitter.last = 'Withheld'
+      updateButtonMessage: function(message){
+        this.buttonMessage = message;
       }
     },
     ready: function(){
