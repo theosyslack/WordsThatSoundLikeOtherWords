@@ -7,7 +7,7 @@
         Submited by {{submitter}} Last Name Witheld
     </div>
     <div v-if="timestamp">
-      <audio class="audio" :src="timestamp.episode" controls v-el:audio @play.capture="setTimestamp">
+      <audio class="audio" :src="timestamp.episode" controls v-el:audio preload="auto" @play.capture="setTimestamp">
         Your browser does not support the <code>audio</code> element.
       </audio>
       <div>
@@ -32,10 +32,18 @@
         }
       },
       submitter: function(){
-        return this.rhyme.submitter.first;
+        if(this.rhyme.submitter){
+          return this.rhyme.submitter.first;
+        } else {
+          return false;
+        }
       },
       timestamp: function(){
-        return this.rhyme.timestamp;
+        if(this.rhyme.timestamp){
+          return this.rhyme.timestamp;
+        } else {
+          return false;
+        }
       }
     },
     methods: {

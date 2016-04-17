@@ -56,6 +56,12 @@ body {
     font-size: 0.55em;
     margin: 0;
     display: inline-block; }
+  .button.-green {
+    background: #41B883;
+    color: #266d4d; }
+    .button.-green:hover {
+      color: #41B883;
+      background: #266d4d; }
   .button:hover {
     background: #4d1a1a; }
 
