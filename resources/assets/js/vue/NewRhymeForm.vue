@@ -6,7 +6,7 @@
         <fieldset class="rhyme">
           <legend>Rhyme Time for 300, Alex</legend>
           <input type="text" name="name"  placeholder="Batman" v-model="form.phrase">
-          <div>Sounds Like</div>
+          <span class="soundslike">Sounds Like</span>
           <input type="text" name="name"  placeholder="Shatman" v-model="form.rhyme">
           <div>
         </fieldset>
@@ -21,10 +21,15 @@
             <input type="checkbox" v-model="timestamp"> </input> I'd like to tag this with a timestamp because I am a good samaritan
           </label>
 
-            <div v-if="timestamp" class="timestamp">
+            <div v-if="timestamp">
               <div>
                 <label>
-                  Which Episode <input type="number" v-model="form.timestamp.episode" placeholder="199">
+                  Which Episode?
+                  <div>
+                    <select>
+                      <option v-for="episode in episodes" :value="episode" >{{episode.title}} </option>
+                    </select>
+                  </div>
                 </label>
               </div>
               <div>
@@ -40,22 +45,24 @@
             </div>
         </fieldset>
 
-        <div class="button" @click="submit"> Send this stuff </div>
+        <div class="button" @click="submit"> {{buttonMessage}} </div>
         <div class="errors" v-if="errors" v-for="error in errors" >
          <div class="error">{{error}}</div>
-      </div> 
+      </div>
       </form>
     </modal>
   </div>
 </template>
 <script>
   var Modal = require('./Modal.vue');
+  var XML = require('xml2js');
   export default {
     data: function(){
       return {
         modalVisible: false,
         timestamp: false,
         errors: '',
+        buttonMessage: 'Raa-roooowww!',
         form: {
           phrase: '',
           rhyme: '',
@@ -77,7 +84,7 @@
     methods: {
       submit: function(){
           console.log(this.form);
-          
+
             // GET request
             this.$http({url: '/', method: 'POST', data: this.form}).then(function (response) {
                console.log(response);
@@ -89,6 +96,13 @@
       withholdLastName: function(){
         this.form.submitter.last = 'Withheld'
       }
+    },
+    ready: function(){
+      this.$http({url:'http://theflophouse.libsyn.com/rss', method:'GET'}).then(function (response) {
+        var data = XML.parseString(response.data, (err, data)=>{
+          this.episodes = data.rss.channel[0].item;
+        });
+      });
     }
   }
 </script>
