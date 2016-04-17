@@ -1,7 +1,9 @@
 <?php
 
 use App\Phrase;
+use App\Rhyme;
 use Http\Requests;
+use Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -14,15 +16,26 @@ use Http\Requests;
 */
 
 Route::get('/', function () {
-    $phrase = Phrase::with(['rhyme'])->orderByRaw("RAND()")->first();
-    $rhymes = $phrase->rhymes;
-    return view('welcome', ['phrase' => $phrase, 'rhymes' => $rhymes]);
+    $rhyme = Rhyme::with(['submitter', 'timestamp'])->orderByRaw("RAND()")->first();
+
+    if ($rhyme) {
+      $rhyme->phrases = $rhyme->phrases();
+      $data = [
+            'rhyme' => $rhyme
+      ];
+      return view('welcome', ['data' => $data]);
+    } else {
+      $data = [
+            'rhyme' => [],
+            'phrases' => []
+      ];
+      return view('welcome', ['data' => $data]);
+    }
+
+
 });
 
-Route::post('/', function (Request $request) {
-    dd($request);
-    return ['message' => 'Yo, we saved your shitty rhyme.'];
-});
+Route::post('/', 'RhymeController@save');
 
 
 Route::get('/episodes', function(Request $request){

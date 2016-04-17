@@ -15,6 +15,7 @@ $width-small: 500px;
 
 
 //Base
+* { box-sizing: border-box; }
 
 html, body {
     height: 100%;
@@ -31,9 +32,13 @@ body {
 
   display: flex;
   justify-content: center;
+
+  @media (max-width: $width-medium){
+    font-size: 14px;
+  }
 }
 
-//Objects 
+//Objects
 
 .container {
   max-width: $width-default;
@@ -54,7 +59,9 @@ body {
   font-size: .75em;
   font-weight: bold;
 }
-
+.audio {
+  margin-top: 1em;
+}
 .button {
   font-size: 1em;
   background: $stiletto;
@@ -64,61 +71,125 @@ body {
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out;
-   
-   
+
+  &.-small {
+    font-size: 0.55em;
+    margin: 0;
+    display: inline-block;
+  }
+
   &:hover {
     background: darken($color: $stiletto, $amount: 20%)
   }
 }
 
+.error {
+  color: red;
+  background: darken(red, 20%);
+}
+
+/* always present */
+.scalein-transition {
+  transition: all .2s cubic-bezier(0,.4,.44,.85);
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* .scalein-enter defines the starting state for entering */
+/* .scalein-leave defines the ending state for leaving */
+.scalein-enter{
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.scalein-leave {
+  opacity: 0;
+  transform: scale(.9);
+}
 //Components
 
 .phrase-form {
-  display: flex;
   width: 100%;
-  text-align: center;
-  flex-wrap: wrap;
+  color: $stiletto;
 
-  * {
-    flex: 100%;
-  }
 
-  legend {
-    width: auto;
-    text-align: left;
-  }
-
-  input {
-    font-size: 2em;
-    margin: .25em 0;
-    text-align: center;
-  }
-
-  .button {
-    margin-top: 1em;
-    font-size: 1.5em;
-    background: black;
-    color: white;
-    padding: 1em;
-    cursor: pointer;
-    border: none;
-  }
-
+  .rhyme,
+  .name,
   .timestamp {
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-    }
+    text-align: left;
+    border: 3px $stiletto solid;
+    padding: 1em;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.5em;
+    margin: .25em 0;
+    border: none;
+    padding: .25em;
+  }
+
+  .rhyme .soundslike,
+  .rhyme input {
+    display: block;
+    text-align: center;
   }
 }
 
 .phrase-banner {
   font-size: 1.5em;
+
   .phrase {
     color: $treepoppy;
     text-shadow: 1px 1px 0px $stiletto,
                  -1px -1px 0px $stiletto,
                  1px -1px 0px $stiletto,
-                 -1px 1px 0px $stiletto,;
+                 -1px 1px 0px $stiletto;
+  }
+
+  .credit {
+    font-size: .5em;
+  }
+}
+.modal-container {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0,0,0,.3);
+
+  .modal {
+    background: $treepoppy;
+    color: black;
+    width: 90vw;
+    min-height: 90vh;
+    position: relative;
+    overflow: scroll;
+    padding: 5vw 5vh;
+  }
+
+  .close {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    height: 2em;
+    width: 3em;
+    font-weight: bold;
+
+    text-align: center;
+    line-height: 2em;
+    background: $stiletto;
+    color: $treepoppy;
+    cursor: pointer;
+
+      &:hover{ background: darken( $stiletto, 20%) }
   }
 }

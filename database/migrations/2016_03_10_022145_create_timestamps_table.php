@@ -16,7 +16,7 @@ class CreateTimestampsTable extends Migration
             $table->increments('id');
             $table->string('host');
             $table->integer('timestamp');
-            $table->integer('episode');
+            $table->string('episode');
             $table->timestamps();
         });
     }

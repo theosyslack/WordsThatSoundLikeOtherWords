@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+* {
+  box-sizing: border-box; }
+
 html, body {
   height: 100%;
   font-family: 'Raleway', sans-serif; }
@@ -16,6 +19,9 @@ body {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center; }
+  @media (max-width: 960px) {
+    body {
+      font-size: 14px; } }
 
 .container {
   max-width: 1180px;
@@ -34,6 +40,9 @@ body {
   font-size: .75em;
   font-weight: bold; }
 
+.audio {
+  margin-top: 1em; }
+
 .button {
   font-size: 1em;
   background: #9A3333;
@@ -43,43 +52,105 @@ body {
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out; }
+  .button.-small {
+    font-size: 0.55em;
+    margin: 0;
+    display: inline-block; }
   .button:hover {
     background: #4d1a1a; }
 
+.error {
+  color: red;
+  background: #990000; }
+
+/* always present */
+.scalein-transition {
+  transition: all 0.2s cubic-bezier(0, 0.4, 0.44, 0.85);
+  opacity: 1;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1); }
+
+/* .scalein-enter defines the starting state for entering */
+/* .scalein-leave defines the ending state for leaving */
+.scalein-enter {
+  opacity: 0;
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1); }
+
+.scalein-leave {
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9); }
+
 .phrase-form {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   width: 100%;
-  text-align: center;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-  .phrase-form * {
-    -webkit-flex: 100%;
-        -ms-flex: 100%;
-            flex: 100%; }
-  .phrase-form legend {
-    width: auto;
-    text-align: left; }
-  .phrase-form input {
-    font-size: 2em;
-    margin: .25em 0;
-    text-align: center; }
-  .phrase-form .button {
-    margin-top: 1em;
+  color: #9A3333; }
+  .phrase-form .rhyme,
+  .phrase-form .name,
+  .phrase-form .timestamp {
+    text-align: left;
+    border: 3px #9A3333 solid;
+    padding: 1em; }
+  .phrase-form input[type="text"],
+  .phrase-form input[type="number"],
+  .phrase-form select {
+    width: 100%;
+    max-width: 100%;
     font-size: 1.5em;
-    background: black;
-    color: white;
-    padding: 1em;
-    cursor: pointer;
-    border: none; }
-  .phrase-form .timestamp input[type="text"],
-  .phrase-form .timestamp input[type="number"] {
-    width: 100%; }
+    margin: .25em 0;
+    border: none;
+    padding: .25em; }
+  .phrase-form .rhyme .soundslike,
+  .phrase-form .rhyme input {
+    display: block;
+    text-align: center; }
 
 .phrase-banner {
   font-size: 1.5em; }
   .phrase-banner .phrase {
     color: #F8981D;
     text-shadow: 1px 1px 0px #9A3333, -1px -1px 0px #9A3333, 1px -1px 0px #9A3333, -1px 1px 0px #9A3333; }
+  .phrase-banner .credit {
+    font-size: .5em; }
+
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgba(0, 0, 0, 0.3); }
+  .modal-container .modal {
+    background: #F8981D;
+    color: black;
+    width: 90vw;
+    min-height: 90vh;
+    position: relative;
+    overflow: scroll;
+    padding: 5vw 5vh; }
+  .modal-container .close {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    height: 2em;
+    width: 3em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2em;
+    background: #9A3333;
+    color: #F8981D;
+    cursor: pointer; }
+    .modal-container .close:hover {
+      background: #4d1a1a; }
