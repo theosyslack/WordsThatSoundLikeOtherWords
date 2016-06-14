@@ -44,11 +44,13 @@ body {
   margin-top: 1em; }
 
 .button {
-  font-size: 1em;
+  font-size: 2em;
+  font-weight: 700;
+  box-shadow: 5px 5px 5px black;
   background: #9A3333;
   color: #F8981D;
   border: none;
-  margin-top: 2em;
+  margin-top: 3em;
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out; }
@@ -64,6 +66,9 @@ body {
       background: #266d4d; }
   .button:hover {
     background: #4d1a1a; }
+
+.errors {
+  margin-top: 1em; }
 
 .error {
   color: red;
@@ -102,6 +107,7 @@ body {
     padding: 1em; }
   .phrase-form input[type="text"],
   .phrase-form input[type="number"],
+  .phrase-form input[type="range"],
   .phrase-form select {
     width: 100%;
     max-width: 100%;
@@ -120,7 +126,35 @@ body {
     color: #F8981D;
     text-shadow: 1px 1px 0px #9A3333, -1px -1px 0px #9A3333, 1px -1px 0px #9A3333, -1px 1px 0px #9A3333; }
   .phrase-banner .credit {
-    font-size: .5em; }
+    margin-top: .5em;
+    font-size: .75em;
+    line-height: 2em; }
+
+.audio-button {
+  margin: 1em 0;
+  display: inline-block;
+  text-align: center; }
+  .audio-button .play,
+  .audio-button .reset {
+    margin: 0 auto;
+    background: #9A3333;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: background .2s ease; }
+    .audio-button .play:hover,
+    .audio-button .reset:hover {
+      background: #4d1a1a; }
+  .audio-button .play {
+    font-size: 1.25em;
+    line-height: 1.9em;
+    margin: 1em 0;
+    padding: .25em 3em; }
+  .audio-button .reset {
+    font-size: .6em;
+    display: inline-block;
+    padding: 1em; }
+  .audio-button audio {
+    display: none; }
 
 .modal-container {
   position: absolute;

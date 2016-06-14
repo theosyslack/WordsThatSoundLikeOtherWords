@@ -63,11 +63,13 @@ body {
   margin-top: 1em;
 }
 .button {
-  font-size: 1em;
+  font-size: 2em;
+  font-weight: 700;
+  box-shadow: 5px 5px 5px black;
   background: $stiletto;
   color: $treepoppy;
   border: none;
-  margin-top: 2em;
+  margin-top: 3em;
   padding: 1em;
   cursor: pointer;
   transition: all .2s ease-in-out;
@@ -92,6 +94,9 @@ body {
   }
 }
 
+.errors {
+  margin-top: 1em;
+}
 .error {
   color: red;
   background: darken(red, 20%);
@@ -121,7 +126,6 @@ body {
   width: 100%;
   color: $stiletto;
 
-
   .rhyme,
   .name,
   .timestamp {
@@ -132,6 +136,7 @@ body {
 
   input[type="text"],
   input[type="number"],
+  input[type="range"],
   select {
     width: 100%;
     max-width: 100%;
@@ -160,9 +165,44 @@ body {
   }
 
   .credit {
-    font-size: .5em;
+    margin-top: .5em;
+    font-size: .75em;
+    line-height: 2em;
   }
 }
+
+.audio-button {
+  margin: 1em 0;
+  display: inline-block;
+  text-align: center; 
+  
+  .play,
+  .reset {
+    margin: 0 auto;
+    background: $stiletto;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: background .2s ease;
+
+    &:hover { background: darken($stiletto, 20%) }
+  }
+
+  .play {
+    font-size: 1.25em;
+    line-height: 1.9em;
+    margin: 1em 0;
+    padding: .25em 3em;
+  }
+
+  .reset {
+    font-size: .6em;
+    display: inline-block;
+    padding: 1em;
+  }
+
+  audio { display: none; }
+}
+
 .modal-container {
 
   position: absolute;
