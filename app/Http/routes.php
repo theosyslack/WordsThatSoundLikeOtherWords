@@ -41,6 +41,16 @@ Route::post('/', 'RhymeController@save');
 Route::get('/episodes', function(Request $request){
 
 });
+Route::get('/rhyme/{id}', function($id){
+  $rhyme = Rhyme::with(['submitter', 'timestamp'])->find($id);
+  $rhyme->phrases = $rhyme->phrases();
+
+  $data = [
+    'rhyme' => $rhyme
+  ];
+
+  return view('welcome', ['data' => $data]);
+});
 
 /*
 |--------------------------------------------------------------------------

@@ -22,6 +22,7 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
     "laravel-elixir": "^4.0.0",
+    "moment": "^2.13.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^1.0.16",
