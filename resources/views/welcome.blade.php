@@ -2,8 +2,6 @@
 <html>
     <head>
         <title>Words That Sound Like Other Words</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="/css/app.css" media="screen">
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
